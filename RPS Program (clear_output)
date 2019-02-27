@@ -1,0 +1,57 @@
+# Importing clear output and random module (Please take note, clear output only works in Jupyter Notebooks)
+from IPython.display import clear_output
+import random
+
+def rps():
+    
+    # Keeps track of score
+    win = 0
+    lose = 0
+    
+    # Library to for cpu choice
+    cpu = ['rock','paper','scizzors']
+    
+    # While loop to run the program until either the Player or the computer scored 3 points
+    while win <= 2 and lose <= 2:
+        
+        # Keeping track of player and computer inputs
+        player = ''
+        computer = random.choice(cpu)
+        
+        # Prompting player to input choice
+        player = input('\nYour move: rock, paper or scizzors? ').lower()
+        
+        # Returns a Draw. No win or lose points are added. Displays actions of player and computer and the score
+        if computer == player:
+            clear_output()
+            print('\nYou chose {}, your opponent chose {}. Draw!'.format(player,computer))
+            print('\n            You:  Opponent:\n            [ {} ]   [ {} ]'.format(win,lose))
+        
+        # Returns a loss. lose points is added. Displays actions of player and computer and the score
+        elif (computer == 'rock' and player == 'scizzors') or (computer == 'scizzors' and player == 'paper') or (computer == 'paper' and player == 'rock'):
+            clear_output()
+            lose += 1
+            print('\nYou chose {}, your opponent chose {}. Too bad!'.format(player,computer))
+            print('\n            You:  Opponent:\n            [ {} ]   [ {} ]'.format(win,lose))
+        
+        # Returns a win. win point is added. Displays actions of player and computer and the score
+        elif (computer == 'scizzors' and player == 'rock') or (computer == 'paper' and player == 'scizzors') or (computer == 'rock' and player == 'paper'):
+            clear_output()
+            win += 1
+            print('\nYou chose {}, your opponent chose {}. Nice one!'.format(player,computer))
+            print('\n            You:  Opponent:\n            [ {} ]   [ {} ]'.format(win,lose))
+        
+        # Returns input is invalid and the score
+        else:
+            clear_output()
+            player == player.lower()
+            print('\nSorry, {} is not an option...'.format(player))
+            print('\n            You:  Opponent:\n            [ {} ]   [ {} ]'.format(win,lose))
+    
+    # Determines whether computer or player has won and returns either a congratulation or positive feedback and ends the game
+    else:
+        if win == 3:
+            print("\n,~'(Congratulations! You win!)'~,")
+            
+        elif lose == 3:
+            print('\n...Better luck next time. You lose...')
